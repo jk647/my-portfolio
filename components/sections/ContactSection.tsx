@@ -35,7 +35,7 @@ export default function ContactSection() {
   // ✅ YOUR EMAILJS CREDENTIALS
   const EMAILJS_SERVICE_ID = 'service_7v3rlf7';
   const EMAILJS_TEMPLATE_ID = 'template_dqknllo';
-  const EMAILJS_PUBLIC_KEY = 'xyzABC123def456'; // 🔴 REPLACE THIS WITH YOUR PUBLIC KEY
+  const EMAILJS_PUBLIC_KEY = 'U1PPaPulCP0BM_S8i'; // 🔴 REPLACE THIS WITH YOUR PUBLIC KEY
 
   useEffect(() => {
     // Initialize EmailJS with your public key
