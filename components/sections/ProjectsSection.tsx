@@ -99,7 +99,7 @@ export default function ProjectsSection() {
                   <div className="h-44 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 group-hover:border-slate-300 dark:group-hover:border-slate-600 transition-all overflow-hidden flex items-center justify-center p-0">
                     {project.initial === 'T' ? (
                       <img 
-                        src="/home.png" 
+                        src="/taskuraShowcase.png" 
                         alt={project.title}
                         className="w-full h-full object-contain group-hover:opacity-60 transition-opacity"
                       />
