@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
-import { BookOpen, Award, Briefcase, ChevronRight } from "lucide-react"
+import { BookOpen, Award, Briefcase, ChevronRight, User } from "lucide-react"
 
 export default function Experience() {
   const ref = useRef(null)
@@ -46,8 +46,8 @@ export default function Experience() {
     },
     currentRole: {
       title: "Current Role",
-      icon: Briefcase,
-      color: "from-slate-500 to-slate-700 dark:from-slate-400 dark:to-slate-200",
+      icon: User,
+      color: "from-slate-600 to-slate-800 dark:from-slate-200 dark:to-slate-400",
       subtitle: "Active Position",
       items: [
         {
@@ -108,7 +108,6 @@ export default function Experience() {
 
   return (
     <section id="experience" className="py-24 px-4 relative overflow-hidden" ref={ref}>
-      {/* BACKGROUND REMOVED — using shared/global background component in page.tsx */}
 
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div variants={containerVariants} initial="hidden" animate={inView ? "visible" : "hidden"}>
@@ -134,7 +133,7 @@ export default function Experience() {
                   <span className="absolute top-[3px] left-[3px] text-slate-900/40 font-black select-none" aria-hidden="true">Journey</span>
                   <span className="absolute top-[2px] left-[2px] text-slate-800/50 font-black select-none" aria-hidden="true">Journey</span>
                   <span className="absolute top-[1px] left-[1px] text-slate-700/60 font-black select-none" aria-hidden="true">Journey</span>
-                  <span 
+                  <span
                     className="relative text-white font-black select-none"
                     style={{
                       textShadow: '0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2), 0 2px 4px rgba(0,0,0,0.3)',
@@ -152,24 +151,21 @@ export default function Experience() {
 
           {/* Main Content - Sidebar + Timeline Layout */}
           <div className="grid lg:grid-cols-[280px_1fr] gap-8">
-            {/* Sidebar Navigator */}
             <motion.div variants={itemVariants} className="space-y-3">
               {(Object.keys(experiences) as Array<keyof typeof experiences>).map((key) => {
                 const section = experiences[key]
                 const Icon = section.icon
                 const isActive = activeSection === key
-                
+
                 return (
                   <button
                     key={key}
                     onClick={() => setActiveSection(key)}
-                    className={`w-full text-left glass-card p-5 rounded-xl border transition-all duration-300 group relative overflow-hidden ${
-                      isActive
+                    className={`w-full text-left glass-card p-5 rounded-xl border transition-all duration-300 group relative overflow-hidden ${isActive
                         ? "border-slate-400 dark:border-slate-500 neon-glow"
                         : "border-slate-200/50 dark:border-slate-700/50 hover:border-slate-300 dark:hover:border-slate-600"
-                    }`}
+                      }`}
                   >
-                    {/* Active indicator bar */}
                     {isActive && (
                       <motion.div
                         layoutId="activeIndicator"
@@ -177,10 +173,9 @@ export default function Experience() {
                         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                       />
                     )}
-                    
-                    {/* Background gradient on hover */}
+
                     <div className={`absolute inset-0 bg-gradient-to-r ${section.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
-                    
+
                     <div className="relative flex items-center gap-3">
                       <div className={`p-2.5 rounded-lg bg-gradient-to-br ${section.color} ${isActive ? "scale-110" : ""} transition-transform duration-300`}>
                         <Icon className="w-5 h-5 text-white dark:text-slate-900" />
@@ -204,15 +199,13 @@ export default function Experience() {
               animate="visible"
               className="relative"
             >
-              {/* Vertical Timeline Line */}
               <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-slate-300 via-slate-400 to-slate-300 dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 hidden md:block" />
 
-              {/* Timeline Items */}
               <div className="space-y-8">
                 {experiences[activeSection].items.map((item: any, idx: number) => {
                   const section = experiences[activeSection]
                   const isLast = idx === section.items.length - 1
-                  
+
                   return (
                     <motion.div
                       key={idx}

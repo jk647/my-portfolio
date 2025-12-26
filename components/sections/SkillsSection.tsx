@@ -42,7 +42,6 @@ export default function SkillsSection() {
 
   return (
     <section id="skills" className="py-24 px-4 relative overflow-hidden" ref={ref}>
-      {/* Background was removed — using shared/global background component instead */}
 
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div 

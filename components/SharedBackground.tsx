@@ -3,31 +3,24 @@
 export default function SharedBackground() {
   return (
     <div className="fixed inset-0 -z-10 bg-white dark:bg-slate-950 pointer-events-none overflow-hidden">
-      {/* Two main large squares - corners only */}
-      {/* Top right square - adjust 'top' value to move up/down */}
       <div
         className="absolute top-0 right-10 w-72 h-72 border-2 border-slate-400/45 dark:border-slate-600/45 rotate-45 rounded-3xl animate-float-sophisticated shadow-2xl shadow-slate-400/20"
         style={{ willChange: "transform, opacity, filter" }}
       ></div>
 
-      {/* Bottom left square - adjust 'bottom' value to move up/down */}
       <div
         className="absolute bottom-0 left-10 w-72 h-72 border-2 border-slate-400/45 dark:border-slate-600/45 -rotate-45 rounded-3xl animate-float-sophisticated-alt shadow-2xl shadow-slate-400/20"
         style={{ willChange: "transform, opacity, filter" }}
       ></div>
 
-      {/* Center area - small elegant elements */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        {/* Small geometric shapes around center */}
         <div className="absolute -top-32 -left-20 w-16 h-16 border border-slate-400/40 dark:border-slate-600/40 rotate-45 rounded-lg animate-spin-very-slow"></div>
         <div className="absolute -bottom-28 right-24 w-20 h-20 border border-slate-400/35 dark:border-slate-600/35 -rotate-12 rounded-xl animate-float-micro"></div>
         <div className="absolute top-40 -right-32 w-14 h-14 border border-slate-400/40 dark:border-slate-600/40 rounded-full animate-pulse-elegant"></div>
         <div className="absolute -top-24 right-28 w-18 h-18 border border-slate-400/35 dark:border-slate-600/35 rounded-full animate-orbit-elegant"></div>
-        {/* Second circle - filling the empty space */}
         <div className="absolute -top-40 left-32 w-20 h-20 border-2 border-slate-400/40 dark:border-slate-600/40 rounded-full animate-pulse-elegant-alt"></div>
       </div>
 
-      {/* Beautiful small particles - scattered elegantly */}
       <div className="absolute top-1/3 left-1/2 w-2 h-2 bg-slate-400/50 dark:bg-slate-600/50 rounded-full animate-twinkle-1"></div>
       <div className="absolute top-1/2 left-1/3 w-2 h-2 bg-slate-400/50 dark:bg-slate-600/50 rounded-full animate-twinkle-2"></div>
       <div className="absolute top-2/3 left-1/2 w-2 h-2 bg-slate-400/50 dark:bg-slate-600/50 rounded-full animate-twinkle-3"></div>
@@ -48,7 +41,6 @@ export default function SharedBackground() {
         ></div>
       </div>
 
-      {/* Subtle gradient orbs for depth - minimal */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-radial from-slate-200/40 via-slate-100/20 to-transparent dark:from-slate-800/30 dark:via-slate-900/15 dark:to-transparent blur-3xl animate-orb-elegant-1"></div>
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-radial from-slate-200/40 via-slate-100/20 to-transparent dark:from-slate-800/30 dark:via-slate-900/15 dark:to-transparent blur-3xl animate-orb-elegant-2"></div>
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-radial from-slate-150/25 to-transparent dark:from-slate-850/25 dark:to-transparent blur-3xl animate-orb-center-elegant"></div>
