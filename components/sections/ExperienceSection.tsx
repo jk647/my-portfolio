@@ -68,19 +68,22 @@ export default function Experience() {
           title: "Flutter App Development",
           organization: "Arfa Karim Technology Incubator, Peshawar",
           period: "September 2025",
-          description: "Comprehensive training in Flutter app development covering Dart programming, cross-platform development, Firebase integration, state management, UI/UX design, and deployment strategies.",
+          description: "Comprehensive training in Flutter app development ...",
+          link: "https://drive.google.com/file/d/FILE_ID_1/view?usp=sharing"
         },
         {
           title: "Digital Skills & Freelancing",
           organization: "KP-TEVTA, Helvetas Pakistan, GWVTC Khar Bajaur",
           period: "Sept - Nov 2021",
-          description: "Professional development in digital skills and freelancing practices, including remote work management, client communication, and project delivery standards.",
+          description: "Professional development in digital skills ...",
+          link: "https://drive.google.com/file/d/FILE_ID_2/view?usp=sharing"
         },
         {
           title: "NCVQ IT - Computer Operator",
           organization: "Khyber Pakhtunkhwa Trade Testing Board",
           period: "December 2021",
-          description: "National vocational qualification in IT and computer operations, covering fundamental computing skills and technical operations.",
+          description: "National vocational qualification in IT ...",
+          link: "https://drive.google.com/file/d/FILE_ID_3/view?usp=sharing"
         },
       ],
     },
@@ -162,8 +165,8 @@ export default function Experience() {
                     key={key}
                     onClick={() => setActiveSection(key)}
                     className={`w-full text-left glass-card p-5 rounded-xl border transition-all duration-300 group relative overflow-hidden ${isActive
-                        ? "border-slate-400 dark:border-slate-500 neon-glow"
-                        : "border-slate-200/50 dark:border-slate-700/50 hover:border-slate-300 dark:hover:border-slate-600"
+                      ? "border-slate-400 dark:border-slate-500 neon-glow"
+                      : "border-slate-200/50 dark:border-slate-700/50 hover:border-slate-300 dark:hover:border-slate-600"
                       }`}
                   >
                     {isActive && (
@@ -242,6 +245,22 @@ export default function Experience() {
                           <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
                             {item.description}
                           </p>
+
+                          {/* Certificate link (if present) */}
+                          {item.link && (
+                            <div className="mt-3">
+                              <a
+                                href={item.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 px-3 py-2 rounded-md font-semibold text-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition"
+                              >
+                                View certificate
+                                <ChevronRight className="w-4 h-4" />
+                              </a>
+                            </div>
+                          )}
+
 
                           {/* Reference Section */}
                           {item.reference && (
