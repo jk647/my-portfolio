@@ -15,7 +15,7 @@ export default function HeroSection() {
     }
     const handleChange = () => {
       if (mq.matches && videoRef.current) videoRef.current.pause();
-      else if (videoRef.current) videoRef.current.play().catch(() => {});
+      else if (videoRef.current) videoRef.current.play().catch(() => { });
     };
     mq.addEventListener?.('change', handleChange);
     return () => mq.removeEventListener?.('change', handleChange);
@@ -60,7 +60,7 @@ export default function HeroSection() {
           <span className="inline-block mt-2 bg-gradient-to-r from-white via-slate-100 to-white bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(255,255,255,0.8)] animate-shimmer">
             <TypewriterEffect
               words={[
-                'Flutter App Developer', 
+                'Flutter App Developer',
                 'Firebase Expert',
                 'UI/UX Enthusiast',
               ]}
@@ -72,34 +72,32 @@ export default function HeroSection() {
 
         {/* Enhanced subtitle with stronger contrast */}
         <p className="text-xl sm:text-2xl text-white mb-8 leading-relaxed max-w-2xl mx-auto font-medium drop-shadow-[0_4px_20px_rgba(0,0,0,0.8)] [text-shadow:_0_2px_15px_rgb(0_0_0_/_80%),_0_0_30px_rgb(255_255_255_/_20%)]">
-Building beautiful, high-performance Flutter apps with modern development practices. Passionate about clean code, smooth UI, and meaningful user experiences.        </p>
+          Building beautiful, high-performance Flutter apps with modern development practices. Passionate about clean code, smooth UI, and meaningful user experiences.        </p>
 
         {/* CTA Buttons - Sweep + Popup */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           {/* Explore My Journey Button - White sweep + popup */}
-          <button 
+          <button
             onClick={() => scrollToSection('about')}
             className="group relative px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-lg font-semibold flex items-center justify-center gap-2 transition-all border border-white/30 overflow-hidden hover:scale-105 cursor-pointer"
           >
             {/* Left-to-right white sweep */}
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 rounded-lg"></span>
-            
+
             <span className="relative z-10">Explore My Journey</span>
             <ArrowRight size={20} className="relative z-10" />
           </button>
 
-          {/* Download Resume Button - Grey monochrome sweep + popup */}
           <a
             href="https://drive.google.com/file/d/15ybKpKaNNWWWRCr4juTa1-ocgLG9_YlV/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative flex items-center gap-2 px-8 py-4 text-sm font-semibold bg-white text-slate-900 rounded-lg transition-all border border-white/50 overflow-hidden hover:scale-105"
           >
-            {/* Left-to-right GREY/monochrome sweep (visible on white) */}
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-300/60 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 rounded-lg"></span>
-            
+
             <Download className="w-4 h-4 relative z-10" />
-            <span className="relative z-10">Download Resume</span>
+            <span className="relative z-10">View Resume</span>
           </a>
         </div>
       </div>

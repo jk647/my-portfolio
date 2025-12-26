@@ -69,21 +69,21 @@ export default function Experience() {
           organization: "Arfa Karim Technology Incubator, Peshawar",
           period: "September 2025",
           description: "Comprehensive training in Flutter app development ...",
-          link: "https://drive.google.com/file/d/FILE_ID_1/view?usp=sharing"
+          link: "https://drive.google.com/file/d/1ijFu3gM1LyHCRmF-GZIEpS7sWjomJO-h/view?usp=drive_link"
         },
         {
           title: "Digital Skills & Freelancing",
           organization: "KP-TEVTA, Helvetas Pakistan, GWVTC Khar Bajaur",
           period: "Sept - Nov 2021",
           description: "Professional development in digital skills ...",
-          link: "https://drive.google.com/file/d/FILE_ID_2/view?usp=sharing"
+          link: "https://drive.google.com/file/d/1gWelAdcbBW8ASqDKt0pPVh3ddkSegHqH/view?usp=drive_link"
         },
         {
           title: "NCVQ IT - Computer Operator",
           organization: "Khyber Pakhtunkhwa Trade Testing Board",
           period: "December 2021",
           description: "National vocational qualification in IT ...",
-          link: "https://drive.google.com/file/d/FILE_ID_3/view?usp=sharing"
+          link: "https://drive.google.com/file/d/1Dw__bzWv21zNoH5ePuU2MwZeXoDhGVn-/view?usp=drive_link"
         },
       ],
     },
