@@ -5,9 +5,16 @@ export default function SharedBackground() {
     <div className="fixed inset-0 -z-10 bg-white dark:bg-slate-950 pointer-events-none overflow-hidden">
       {/* Two main large squares - corners only */}
       {/* Top right square - adjust 'top' value to move up/down */}
-      <div className="absolute top-0 right-10 w-72 h-72 border-2 border-slate-400/45 dark:border-slate-600/45 rotate-45 rounded-3xl animate-float-sophisticated shadow-2xl shadow-slate-400/20"></div>
+      <div
+        className="absolute top-0 right-10 w-72 h-72 border-2 border-slate-400/45 dark:border-slate-600/45 rotate-45 rounded-3xl animate-float-sophisticated shadow-2xl shadow-slate-400/20"
+        style={{ willChange: "transform, opacity, filter" }}
+      ></div>
+
       {/* Bottom left square - adjust 'bottom' value to move up/down */}
-      <div className="absolute bottom-0 left-10 w-72 h-72 border-2 border-slate-400/45 dark:border-slate-600/45 -rotate-45 rounded-3xl animate-float-sophisticated-alt shadow-2xl shadow-slate-400/20"></div>
+      <div
+        className="absolute bottom-0 left-10 w-72 h-72 border-2 border-slate-400/45 dark:border-slate-600/45 -rotate-45 rounded-3xl animate-float-sophisticated-alt shadow-2xl shadow-slate-400/20"
+        style={{ willChange: "transform, opacity, filter" }}
+      ></div>
 
       {/* Center area - small elegant elements */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -47,30 +54,59 @@ export default function SharedBackground() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-radial from-slate-150/25 to-transparent dark:from-slate-850/25 dark:to-transparent blur-3xl animate-orb-center-elegant"></div>
 
       <style jsx>{`
+        /* ===== Big squares: slightly more noticeable but still subtle ===== */
         @keyframes float-sophisticated {
-          0%, 100% {
+          0%,
+          100% {
             transform: translate(0, 0) rotate(45deg) scale(1);
+            opacity: 0.95;
+            filter: drop-shadow(0 8px 18px rgba(58, 75, 102, 0.05));
           }
-          33% {
-            transform: translate(-15px, -20px) rotate(48deg) scale(1.02);
+          25% {
+            transform: translate(-22px, -28px) rotate(47deg) scale(1.03);
+            opacity: 1;
+            filter: drop-shadow(0 12px 28px rgba(58, 75, 102, 0.08));
           }
-          66% {
-            transform: translate(10px, -15px) rotate(43deg) scale(0.98);
+          50% {
+            transform: translate(14px, -18px) rotate(43deg) scale(0.985) skewX(-0.3deg);
+            opacity: 0.9;
+            filter: drop-shadow(0 6px 14px rgba(58, 75, 102, 0.04));
+          }
+          75% {
+            transform: translate(-8px, -10px) rotate(46deg) scale(1.01);
+            opacity: 0.98;
+            filter: drop-shadow(0 10px 22px rgba(58, 75, 102, 0.06));
           }
         }
+
         @keyframes float-sophisticated-alt {
-          0%, 100% {
+          0%,
+          100% {
             transform: translate(0, 0) rotate(-45deg) scale(1);
+            opacity: 0.95;
+            filter: drop-shadow(0 8px 18px rgba(58, 75, 102, 0.05));
           }
-          33% {
-            transform: translate(15px, 20px) rotate(-42deg) scale(1.02);
+          25% {
+            transform: translate(22px, 28px) rotate(-43deg) scale(1.035) skewX(0.4deg);
+            opacity: 1;
+            filter: drop-shadow(0 12px 28px rgba(58, 75, 102, 0.08));
           }
-          66% {
-            transform: translate(-10px, 15px) rotate(-48deg) scale(0.98);
+          50% {
+            transform: translate(-14px, 18px) rotate(-48deg) scale(0.985);
+            opacity: 0.9;
+            filter: drop-shadow(0 6px 14px rgba(58, 75, 102, 0.04));
+          }
+          75% {
+            transform: translate(8px, 10px) rotate(-46deg) scale(1.01);
+            opacity: 0.98;
+            filter: drop-shadow(0 10px 22px rgba(58, 75, 102, 0.06));
           }
         }
+
+        /* micro / center animations unchanged */
         @keyframes float-micro {
-          0%, 100% {
+          0%,
+          100% {
             transform: translateY(0) rotate(-12deg);
           }
           50% {
@@ -86,7 +122,8 @@ export default function SharedBackground() {
           }
         }
         @keyframes pulse-elegant {
-          0%, 100% {
+          0%,
+          100% {
             transform: scale(1);
             opacity: 0.4;
           }
@@ -96,7 +133,8 @@ export default function SharedBackground() {
           }
         }
         @keyframes pulse-elegant-alt {
-          0%, 100% {
+          0%,
+          100% {
             transform: scale(1);
             opacity: 0.4;
           }
@@ -119,7 +157,8 @@ export default function SharedBackground() {
           }
         }
         @keyframes twinkle-1 {
-          0%, 100% {
+          0%,
+          100% {
             transform: scale(0.8);
             opacity: 0.3;
           }
@@ -129,7 +168,8 @@ export default function SharedBackground() {
           }
         }
         @keyframes twinkle-2 {
-          0%, 100% {
+          0%,
+          100% {
             transform: scale(0.6);
             opacity: 0.2;
           }
@@ -139,7 +179,8 @@ export default function SharedBackground() {
           }
         }
         @keyframes twinkle-3 {
-          0%, 100% {
+          0%,
+          100% {
             transform: scale(0.7);
             opacity: 0.25;
           }
@@ -149,7 +190,8 @@ export default function SharedBackground() {
           }
         }
         @keyframes twinkle-4 {
-          0%, 100% {
+          0%,
+          100% {
             transform: scale(0.9);
             opacity: 0.3;
           }
@@ -159,7 +201,8 @@ export default function SharedBackground() {
           }
         }
         @keyframes twinkle-5 {
-          0%, 100% {
+          0%,
+          100% {
             transform: scale(0.75);
             opacity: 0.25;
           }
@@ -169,7 +212,8 @@ export default function SharedBackground() {
           }
         }
         @keyframes orb-elegant-1 {
-          0%, 100% {
+          0%,
+          100% {
             transform: translate(0, 0) scale(1);
             opacity: 0.4;
           }
@@ -179,7 +223,8 @@ export default function SharedBackground() {
           }
         }
         @keyframes orb-elegant-2 {
-          0%, 100% {
+          0%,
+          100% {
             transform: translate(0, 0) scale(1);
             opacity: 0.4;
           }
@@ -189,7 +234,8 @@ export default function SharedBackground() {
           }
         }
         @keyframes orb-center-elegant {
-          0%, 100% {
+          0%,
+          100% {
             transform: translate(-50%, -50%) scale(1);
             opacity: 0.25;
           }
@@ -198,12 +244,13 @@ export default function SharedBackground() {
             opacity: 0.4;
           }
         }
-        
+
+        /* slightly snappier but still chill timings for the big squares */
         .animate-float-sophisticated {
-          animation: float-sophisticated 28s ease-in-out infinite;
+          animation: float-sophisticated 20s cubic-bezier(.22,.9,.28,.99) infinite;
         }
         .animate-float-sophisticated-alt {
-          animation: float-sophisticated-alt 32s ease-in-out infinite 2s;
+          animation: float-sophisticated-alt 22s cubic-bezier(.22,.9,.28,.99) infinite 1.2s;
         }
         .animate-float-micro {
           animation: float-micro 20s ease-in-out infinite;
