@@ -53,7 +53,7 @@ export default function ProjectsSection() {
     }
   }, [lightboxOpen]);
 
-  const openLightbox = (src, alt) => {
+  const openLightbox = (src: string, alt: string) => {
     setLightboxSrc(src);
     setLightboxAlt(alt || 'Preview');
     setLightboxOpen(true);
@@ -211,7 +211,7 @@ export default function ProjectsSection() {
         </motion.div>
       </div>
 
-      {/* Lightbox / Modal - FIXED VERSION */}
+      {/* Lightbox / Modal */}
       <AnimatePresence>
         {lightboxOpen && (
           <motion.div
