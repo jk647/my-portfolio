@@ -1,12 +1,15 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Github, Download } from 'lucide-react';
 
 export default function ProjectsSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.2 });
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxSrc, setLightboxSrc] = useState('');
+  const [lightboxAlt, setLightboxAlt] = useState('');
 
   const projects = [
     {
@@ -17,6 +20,8 @@ export default function ProjectsSection() {
       download: '#',
       gradient: 'from-slate-700 to-slate-900 dark:from-slate-300 dark:to-slate-100',
       initial: 'T',
+      showcase: '/taskuraShowcase.png',
+      showcaseAlt: 'Taskura showcase',
     },
     {
       title: 'Coming Soon',
@@ -30,6 +35,32 @@ export default function ProjectsSection() {
     },
   ];
 
+  useEffect(() => {
+    function onKey(e) {
+      if (e.key === 'Escape' && lightboxOpen) setLightboxOpen(false);
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightboxOpen]);
+
+  useEffect(() => {
+    if (lightboxOpen) {
+      // quick focus management: focus the close button after open
+      const btn = document.getElementById('lightbox-close-btn');
+      btn?.focus();
+      // prevent body scroll while lightbox is open
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [lightboxOpen]);
+
+  const openLightbox = (src, alt) => {
+    setLightboxSrc(src);
+    setLightboxAlt(alt || 'Preview');
+    setLightboxOpen(true);
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
@@ -41,23 +72,19 @@ export default function ProjectsSection() {
   };
 
   return (
-    <section 
-      id="projects" 
-      className="relative py-20 md:py-32 px-6 overflow-hidden" 
-      ref={ref}
-    >
+    <section id="projects" className="relative py-20 md:py-32 px-6 overflow-hidden" ref={ref}>
       <div className="relative max-w-6xl mx-auto z-10">
         <motion.div variants={containerVariants} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
           {/* Header */}
           <motion.div variants={itemVariants} className="text-center mb-20">
             <h2 className="text-6xl md:text-7xl font-black font-display mb-8">
-              Featured{" "}
+              Featured{' '}
               <span
                 className="relative inline-block px-4 py-1 rounded-xl overflow-hidden group cursor-pointer translate-y-4"
                 style={{
                   backgroundImage: "url('/messageContainerBG.jpeg')",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
                 }}
               >
                 <span className="absolute inset-0 bg-gradient-to-br from-black/60 via-slate-900/50 to-black/60 rounded-xl"></span>
@@ -70,7 +97,7 @@ export default function ProjectsSection() {
                   <span className="absolute top-[3px] left-[3px] text-slate-900/40 font-black select-none" aria-hidden="true">Projects</span>
                   <span className="absolute top-[2px] left-[2px] text-slate-800/50 font-black select-none" aria-hidden="true">Projects</span>
                   <span className="absolute top-[1px] left-[1px] text-slate-700/60 font-black select-none" aria-hidden="true">Projects</span>
-                  <span className="relative text-white font-black select-none" style={{textShadow: '0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2), 0 2px 4px rgba(0,0,0,0.3)', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))'}}>Projects</span>
+                  <span className="relative text-white font-black select-none" style={{ textShadow: '0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2), 0 2px 4px rgba(0,0,0,0.3)', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))' }}>Projects</span>
                   <span className="absolute top-[-1px] left-0 text-white/40 font-black select-none blur-[0.5px]" aria-hidden="true">Projects</span>
                 </span>
                 <span className="absolute inset-0 rounded-xl shadow-[inset_0_0_30px_rgba(255,255,255,0.1)] group-hover:shadow-[inset_0_0_50px_rgba(255,255,255,0.15)] transition-all duration-500"></span>
@@ -96,12 +123,20 @@ export default function ProjectsSection() {
                 />
 
                 <div className="relative p-6 space-y-4 h-full flex flex-col">
-                  <div className="h-44 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 group-hover:border-slate-300 dark:group-hover:border-slate-600 transition-all overflow-hidden flex items-center justify-center p-0">
-                    {project.initial === 'T' ? (
-                      <img 
-                        src="/taskuraShowcase.png" 
-                        alt={project.title}
-                        className="w-full h-full object-contain group-hover:opacity-60 transition-opacity"
+                  <div
+                    className="h-44 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 group-hover:border-slate-300 dark:group-hover:border-slate-600 transition-all overflow-hidden flex items-center justify-center p-0"
+                  >
+                    {project.showcase ? (
+                      <img
+                        src={project.showcase}
+                        alt={project.showcaseAlt || project.title}
+                        className="w-full h-full object-contain group-hover:opacity-60 transition-opacity cursor-pointer"
+                        role="button"
+                        tabIndex={0}
+                        onClick={() => openLightbox(project.showcase, project.showcaseAlt || project.title)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') openLightbox(project.showcase, project.showcaseAlt || project.title);
+                        }}
                       />
                     ) : (
                       <div
@@ -174,6 +209,52 @@ export default function ProjectsSection() {
           </div>
         </motion.div>
       </div>
+
+      {/* Lightbox / Modal */}
+      {lightboxOpen && (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          aria-modal="true"
+          role="dialog"
+          onClick={() => setLightboxOpen(false)}
+        >
+          <motion.div
+            className="max-w-[95%] max-h-[95%] p-4"
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="relative bg-transparent rounded">
+              <button
+                id="lightbox-close-btn"
+                onClick={() => setLightboxOpen(false)}
+                className="absolute -top-4 -right-4 z-50 inline-flex items-center justify-center rounded-full p-2 bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2"
+                aria-label="Close preview"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+
+              <img
+                src={lightboxSrc}
+                alt={lightboxAlt}
+                className="max-w-full max-h-[80vh] object-contain rounded shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              />
+
+              <div className="mt-3 text-center text-sm text-slate-200 dark:text-slate-300">
+                <div className="bg-black/40 inline-block px-3 py-1 rounded-md text-xs font-medium">{lightboxAlt}</div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
 
       <style jsx>{`
         @keyframes pulse-glow {
