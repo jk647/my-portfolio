@@ -36,7 +36,7 @@ export default function ProjectsSection() {
   ];
 
   useEffect(() => {
-    function onKey(e) {
+    function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape' && lightboxOpen) setLightboxOpen(false);
     }
     window.addEventListener('keydown', onKey);
