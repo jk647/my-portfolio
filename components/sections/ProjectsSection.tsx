@@ -1,8 +1,8 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { Github, Download } from 'lucide-react';
+import { Github, Download, X } from 'lucide-react';
 
 export default function ProjectsSection() {
   const ref = useRef(null);
@@ -45,10 +45,8 @@ export default function ProjectsSection() {
 
   useEffect(() => {
     if (lightboxOpen) {
-      // quick focus management: focus the close button after open
       const btn = document.getElementById('lightbox-close-btn');
       btn?.focus();
-      // prevent body scroll while lightbox is open
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -135,7 +133,10 @@ export default function ProjectsSection() {
                         tabIndex={0}
                         onClick={() => openLightbox(project.showcase, project.showcaseAlt || project.title)}
                         onKeyDown={(e) => {
-                          if (e.key === 'Enter' || e.key === ' ') openLightbox(project.showcase, project.showcaseAlt || project.title);
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            openLightbox(project.showcase, project.showcaseAlt || project.title);
+                          }
                         }}
                       />
                     ) : (
@@ -210,51 +211,56 @@ export default function ProjectsSection() {
         </motion.div>
       </div>
 
-      {/* Lightbox / Modal */}
-      {lightboxOpen && (
-        <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          aria-modal="true"
-          role="dialog"
-          onClick={() => setLightboxOpen(false)}
-        >
+      {/* Lightbox / Modal - FIXED VERSION */}
+      <AnimatePresence>
+        {lightboxOpen && (
           <motion.div
-            className="max-w-[95%] max-h-[95%] p-4"
-            initial={{ scale: 0.9 }}
-            animate={{ scale: 1 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            aria-modal="true"
+            role="dialog"
+            onClick={() => setLightboxOpen(false)}
           >
-            <div className="relative bg-transparent rounded">
+            <motion.div
+              className="relative max-w-[95vw] max-h-[95vh] p-4"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
               <button
                 id="lightbox-close-btn"
                 onClick={() => setLightboxOpen(false)}
-                className="absolute -top-4 -right-4 z-50 inline-flex items-center justify-center rounded-full p-2 bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2"
+                className="absolute -top-12 right-0 z-50 inline-flex items-center justify-center rounded-full p-3 bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 shadow-lg hover:bg-white dark:hover:bg-slate-700 transition-all focus:outline-none focus:ring-2 focus:ring-slate-500"
                 aria-label="Close preview"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
+                <X className="w-5 h-5 text-slate-700 dark:text-slate-200" />
               </button>
 
-              <img
-                src={lightboxSrc}
-                alt={lightboxAlt}
-                className="max-w-full max-h-[80vh] object-contain rounded shadow-2xl"
-                onClick={(e) => e.stopPropagation()}
-              />
-
-              <div className="mt-3 text-center text-sm text-slate-200 dark:text-slate-300">
-                <div className="bg-black/40 inline-block px-3 py-1 rounded-md text-xs font-medium">{lightboxAlt}</div>
+              {/* Image Container */}
+              <div className="bg-white dark:bg-slate-900 rounded-lg p-2 shadow-2xl">
+                <img
+                  src={lightboxSrc}
+                  alt={lightboxAlt}
+                  className="max-w-full max-h-[85vh] object-contain rounded"
+                  onClick={(e) => e.stopPropagation()}
+                />
               </div>
-            </div>
+
+              {/* Caption */}
+              <div className="mt-4 text-center">
+                <div className="inline-block bg-black/60 backdrop-blur-sm px-4 py-2 rounded-lg">
+                  <p className="text-sm font-medium text-white">{lightboxAlt}</p>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
+        )}
+      </AnimatePresence>
 
       <style jsx>{`
         @keyframes pulse-glow {
